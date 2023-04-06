@@ -1,0 +1,62 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Todo {
+  """Todo ID"""
+  id: Int!
+
+  """Todo description"""
+  description: String!
+  done: Boolean!
+}
+
+"""Aggregation type"""
+type AggregationType {
+  total: Int!
+  pending: Int!
+  completed: Int!
+
+  """Total todo completed"""
+  totalTodoCompleted: Int! @deprecated(reason: "Use completed instead")
+}
+
+type Query {
+  """Hello World message"""
+  helloWorld: String!
+  randomNumber: Float!
+
+  """Random number from 0 to the given number"""
+  randomFromZeroTo(to: Int): Int!
+  todos(
+    """Filter todo list by status"""
+    status: Boolean
+  ): [Todo!]!
+  todo(id: Int!): Todo!
+  totalTodos: Int!
+  pendingTodos: Int!
+  completedTodos: Int!
+  aggregations: AggregationType!
+}
+
+type Mutation {
+  createTodo(createTodoInput: CreateTodoInput!): Todo!
+  updateTodo(updateTodoInput: UpdateTodoInput!): Todo!
+  removeTodo(id: Int!): Boolean!
+}
+
+input CreateTodoInput {
+  """What needs to be done?"""
+  description: String!
+}
+
+input UpdateTodoInput {
+  """Todo ID"""
+  id: Int!
+
+  """What needs to be done?"""
+  description: String
+
+  """Is it done?"""
+  done: Boolean
+}
